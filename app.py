@@ -33,16 +33,19 @@ def predict():
 
     #predict the price given the values inputted by user
     prediction =model.predict(final_features)
-    
+
     #Round the output to 2 decimal places
     output = round(prediction[0], 2)
-    
+
     #If the output is negative, the values entered are unreasonable to the context of the application
     #If the output is greater than 0, return prediction
     if output < 0:
         return render_template('housingprice.html', prediction_text = "Predicted Price is negative, values entered not reasonable")
-    elif output >= 0:
-        return render_template('housingprice.html', prediction_text = 'Predicted median house value is : ${}'.format(output))   
+    else:
+        return render_template(
+            'housingprice.html',
+            prediction_text=f'Predicted median house value is : ${output}',
+        )   
 
 #Run app
 if __name__ == "__main__":
